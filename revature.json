@@ -1,0 +1,25 @@
+{
+  "type": "java",
+  "testFiles": [
+    {
+      "path": "src/test/java/SeleniumTest.java",
+      "testCases": [
+        {
+          "methodName": "testH1Color",
+          "label": "Verify <h1> text color styling",
+          "description": "Uses Selenium WebDriver to locate the <h1> element on StyledPage.html and asserts that its computed CSS color value corresponds to blue."
+        },
+        {
+          "methodName": "testHighlightBackground",
+          "label": "Verify .highlight background color styling",
+          "description": "Finds the element with class 'highlight' and checks that its computed background-color CSS value corresponds to yellow."
+        },
+        {
+          "methodName": "testMainTitleUppercase",
+          "label": "Verify #main-title text-transform rule",
+          "description": "Locates the element with id 'main-title' and asserts that its CSS text-transform property is set to 'uppercase', confirming the style rule is applied."
+        }
+      ]
+    }
+  ]
+}
