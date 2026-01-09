@@ -35,8 +35,9 @@ public class SeleniumTest {
 
     @After
     public void teardown() {
-        if (webDriver != null) webDriver.quit();
+        webDriver.quit();
     }
+
 
     @Test
     public void testAllPizzaPadding() {
@@ -79,5 +80,6 @@ public class SeleniumTest {
         assertEquals("10px solid rgb(0, 0, 0)", pizza3.getCssValue("border"));
     }
 }
+
 
 
