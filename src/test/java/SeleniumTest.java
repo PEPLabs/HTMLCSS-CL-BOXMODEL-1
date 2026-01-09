@@ -11,16 +11,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-
-
 public class SeleniumTest {
 
     private WebDriver webDriver;
 
     @Before
     public void setUp() {
-        // Set up ChromeDriver path
-        System.setProperty("webdriver.chrome.driver", "/driver/chromedriver");
+        // Use a consistent relative path and convert it to absolute at runtime
+        File driver = new File("driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", driver.getAbsolutePath());
 
         // Get file
         File file = new File("src/main/CSSBoxModel.html");
@@ -37,7 +36,7 @@ public class SeleniumTest {
 
     @After
     public void teardown() {
-        webDriver.quit();
+        if (webDriver != null) webDriver.quit();
     }
 
     @Test
@@ -55,13 +54,13 @@ public class SeleniumTest {
     @Test
     public void testPizza1BackgroundColor() {
         WebElement pizza1 = webDriver.findElement(By.id("pizza1"));
-        assertEquals("rgba(255, 255, 0, 1)", pizza1.getCssValue("background-color")); // Expected value for yellow
+        assertEquals("rgba(255, 255, 0, 1)", pizza1.getCssValue("background-color"));
     }
 
     @Test
     public void testPizza2Color() {
         WebElement pizza2 = webDriver.findElement(By.id("pizza2"));
-        assertEquals("rgba(255, 0, 0, 1)", pizza2.getCssValue("color")); // Expected value for red
+        assertEquals("rgba(255, 0, 0, 1)", pizza2.getCssValue("color"));
     }
 
     @Test
@@ -69,8 +68,7 @@ public class SeleniumTest {
         WebElement pizza2 = webDriver.findElement(By.id("pizza2"));
         assertEquals("solid", pizza2.getCssValue("border-style"));
         assertEquals("rgb(139, 69, 19)", pizza2.getCssValue("border-color"));
-        // For some reason, possible due to inconsistencies between browsers, the border-width is sometimes
-        // retrieved as 4.6667. By converting it to a double and rounding, we circumvent this problem:
+
         double borderWidth = Double.valueOf(pizza2.getCssValue("border-width").replace("px",""));
         borderWidth = Math.round(borderWidth);
         assertEquals(5.0, borderWidth, 0.01);
@@ -79,8 +77,6 @@ public class SeleniumTest {
     @Test
     public void testPizza3Border() {
         WebElement pizza3 = webDriver.findElement(By.id("pizza3"));
-        assertEquals("10px solid rgb(0, 0, 0)", pizza3.getCssValue("border")); // Expected value for black solid 10px
+        assertEquals("10px solid rgb(0, 0, 0)", pizza3.getCssValue("border"));
     }
-
 }
-
