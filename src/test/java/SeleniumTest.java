@@ -17,9 +17,8 @@ public class SeleniumTest {
 
     @Before
     public void setUp() {
-        // Use a consistent relative path and convert it to absolute at runtime
-        File driver = new File("driver/" + driverName);
-        System.setProperty("webdriver.chrome.driver", driver.getAbsolutePath());
+       
+       System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
 
         // Get file
         File file = new File("src/main/CSSBoxModel.html");
@@ -80,4 +79,5 @@ public class SeleniumTest {
         assertEquals("10px solid rgb(0, 0, 0)", pizza3.getCssValue("border"));
     }
 }
+
 
